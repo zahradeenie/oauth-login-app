@@ -1,14 +1,12 @@
 <template>
-  <p>hello</p>
+  <div class="container">
+    <div class="g-signin2"></div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "app",
-  data() {
-    return {};
-  },
-  methods: {}
+  name: "App"
 };
 </script>
 
@@ -17,5 +15,13 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
