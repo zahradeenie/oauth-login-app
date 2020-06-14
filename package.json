@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/zahradeenie/oauth-login#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "googleapis": "^52.1.0",
     "koa": "^2.12.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^9.0.1",
