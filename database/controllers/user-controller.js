@@ -15,6 +15,7 @@ const createUser = async (data) => {
     firstName: firstName.trim(),
     lastName: lastName.trim(),
     email: data.email,
+    oauthId: data.id
   }
 
   try {
@@ -41,10 +42,9 @@ const getOneUser = async (data) => {
     const user = await User.findOne({
       limit: 1,
       where: {
-        email: data.email
+        oauthId: data.id
       }
     });
-
     return user;
 
   } catch (error) {
@@ -56,5 +56,6 @@ const getOneUser = async (data) => {
 }
 
 module.exports = {
-  createUser
+  createUser,
+  getOneUser
 };

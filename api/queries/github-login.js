@@ -19,12 +19,16 @@ const githubLoginCallback = async (req, res) => {
 
   try {
     const { data: user } = await route.fetchGithubUser(accessToken, req);
-    if (user) {
 
-      await userController.createUser(user)
+    const userExists = await userController.getOneUser(user);
+
+    if (userExists) {
+      res.status(500).send({ msg: 'did not work' })
+    } else {
+      const newUser = await userController.createUser(user);
+      res.status(200).send({ user: newUser, msg: 'User successfully logged in' });
     }
 
-    res.status(200).send({ msg: 'User successfully logged in' });
   } catch (error) {
     res.status(500).send({ msg: error.message });
     console.log(error);
