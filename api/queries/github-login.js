@@ -20,6 +20,7 @@ const githubLoginCallback = async (req, res) => {
   try {
     const { data: user } = await route.fetchGithubUser(accessToken, req);
     if (user) {
+
       await userController.createUser(user)
     }
 

@@ -1,5 +1,5 @@
 const db = require('../models');
-const User = db.user;
+const User = db.User;
 
 const createUser = async (data) => {
   if (!data) {
@@ -9,22 +9,48 @@ const createUser = async (data) => {
     });
   }
 
-  const firstName = data.name.substring(0, data.name.indexOf(' '));
-  const lastName = data.name.substring(0, data.name.indexOf(' ') + 1);
+  const [firstName, lastName] = data.name.split(' ');
 
   const user = {
-    firstName: firstName !== '' ? firstName : lastName,
-    lastName: firstName !== '' ? lastName : '',
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
     email: data.email,
   }
 
   try {
     const newUser = await User.create(user);
     return newUser.json();
+
   } catch (error) {
     return {
       status: 500,
       msg: error.message || 'Could not save this user'
+    };
+  }
+}
+
+const getOneUser = async (data) => {
+  if (!data) {
+    return ({
+      status: 400,
+      msg: 'No data provided'
+    });
+  }
+
+  try {
+    const user = await User.findOne({
+      limit: 1,
+      where: {
+        email: data.email
+      }
+    });
+
+    return user;
+
+  } catch (error) {
+    return {
+      status: 500,
+      msg: error.message || `Could not find user ${data.name}`
     };
   }
 }
