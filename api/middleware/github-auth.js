@@ -14,7 +14,6 @@ const getAccessToken = async ({ code, clientId, clientSecret }) => {
 
   const response = await axios.post('https://github.com/login/oauth/access_token', body, opts);
   const accessToken = response.data['access_token'];
-  // save token in DB
 
   return accessToken;
 }
