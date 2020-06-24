@@ -1,22 +1,21 @@
 const db = require('../models');
 const User = db.user;
-// const Op = db.Sequelize.Op;
 
-const createUser = async (user) => {
-  if (!user) {
+const createUser = async (data) => {
+  if (!data) {
     return ({
       status: 400,
       msg: 'Unauthorized to save this user'
     });
   }
 
-  const firstName = user.name.substring(0, user.name.indexOf(' '));
-  const lastName = user.name.substring(0, user.name.indexOf(' ') + 1);
+  const firstName = data.name.substring(0, data.name.indexOf(' '));
+  const lastName = data.name.substring(0, data.name.indexOf(' ') + 1);
 
   const user = {
     firstName: firstName !== '' ? firstName : lastName,
     lastName: firstName !== '' ? lastName : '',
-    email: user.email,
+    email: data.email,
   }
 
   try {

@@ -6,7 +6,7 @@ module.exports = {
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port": "5432",
-    "operatorsAliases": false
+    "operatorsAliases": 0
   },
   "test": {
     "username": "postgres",
@@ -14,7 +14,7 @@ module.exports = {
     "database": "oauth_login_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": 0
   },
   "production": {
     "username": "postgres",
@@ -22,6 +22,6 @@ module.exports = {
     "database": "oauth_login_prod",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": 0
   }
 }
