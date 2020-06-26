@@ -17,21 +17,14 @@ const githubLoginCallback = async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
   };
 
-  try {
-    const { data: user } = await route.fetchGithubUser(accessToken, req);
+  const { data: user } = await route.fetchGithubUser(accessToken, req);
+  const userExists = await userController.getOneUser(user);
 
-    const userExists = await userController.getOneUser(user);
-
-    if (userExists) {
-      res.status(500).send({ msg: 'did not work' })
-    } else {
-      const newUser = await userController.createUser(user);
-      res.status(200).send({ user: newUser, msg: 'User successfully logged in' });
-    }
-
-  } catch (error) {
-    res.status(500).send({ msg: error.message });
-    console.log(error);
+  if (userExists) {
+    res.status(401).send({ msg: 'User already exists' });
+  } else {
+    const newUser = await userController.createUser(user);
+    res.status(200).send({ user: newUser, msg: 'User successfully logged in' });
   }
 }
 

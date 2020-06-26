@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 // Github
 app.get('/login/github', route.githubLogin);
-app.get('/oauth-callback', route.githubLoginCallback);
+app.get('/github-oauth-callback', route.githubLoginCallback);
 
 app.listen(port);
 console.log(`Listening on port: ${port}`);

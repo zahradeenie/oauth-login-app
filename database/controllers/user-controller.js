@@ -5,7 +5,7 @@ const createUser = async (data) => {
   if (!data) {
     return ({
       status: 400,
-      msg: 'Unauthorized to save this user'
+      msg: `Unauthorized to save this user`
     });
   }
 
@@ -25,7 +25,8 @@ const createUser = async (data) => {
   } catch (error) {
     return {
       status: 500,
-      msg: error.message || 'Could not save this user'
+      msg: error.message,
+      info: `Could not save user: ${data}`
     };
   }
 }
@@ -34,7 +35,7 @@ const getOneUser = async (data) => {
   if (!data) {
     return ({
       status: 400,
-      msg: 'No data provided'
+      msg: 'No data provided to find a user'
     });
   }
 
@@ -50,8 +51,9 @@ const getOneUser = async (data) => {
   } catch (error) {
     return {
       status: 500,
-      msg: error.message || `Could not find user ${data.name}`
-    };
+      msg: error.message,
+      info: `Could not find user: ${data}`
+    }
   }
 }
 
