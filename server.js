@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const route = require('./api/queries/github-login');
+const githubRoute = require('./api/queries/github-login');
+const googleRoute = require('./api/queries/google-login');
 
 const app = express();
 const port = 5000;
@@ -19,8 +20,13 @@ app.get('/', (req, res) => {
 });
 
 // Github
-app.get('/login/github', route.githubLogin);
-app.get('/github-oauth-callback', route.githubLoginCallback);
+app.get('/login/github', githubRoute.githubLogin);
+app.get('/github-oauth-callback', githubRoute.githubLoginCallback);
+
+// Google
+app.get('/login/google', googleRoute.googleLogin);
+app.get('/oauth2callback', googleRoute.googleLoginCallback);
+
 
 app.listen(port);
 console.log(`Listening on port: ${port}`);
