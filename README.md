@@ -6,14 +6,14 @@ I'm also going to add in a normal email/password login to learn how to hash pass
 
 ## Understanding OAuth
 
-Before I can start working, I need to find out what is OAuth and how does it work? The abstract definition of the OAuth framework is that 'enables a third-party application to obtain limited access to an HTTP service'. This protocol flow is defined with 4 roles:
+Before I can start working, I need to find out what is OAuth and how it works? The abstract definition of the OAuth framework is that 'enables a third-party application to obtain limited access to an HTTP service'. This protocol flow is defined with 4 roles:
 
 1. resource owner
   - this is an entity that can grant access to its protected resource (Google / Facebook)
 2. resoure server
   - this is the server that hosts the protected resource (an API). It accepts and responds to requests via access tokens.
 3. client
-  - the application making the request for a protected resource with authorization from the resource owner.
+  - the application making the request for a protected resource with authorization from the resource owner. this is not necessarily the browser but just refers to the entity making the request.
 4. authorization server
   - the server that issues access tokens once it has authenticated the resource owner and received authorization.
 
@@ -40,7 +40,7 @@ Before I can start working, I need to find out what is OAuth and how does it wor
 
 ### Technology used
 - Vue
-- Koa
-- Postgres
+- Express
+- Postgres - running via Docker
 - Sequelize
-- OAuth (Google, Facebook, GitHub)
+- OAuth providers: Google, Facebook, GitHub
