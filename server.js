@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const githubRoute = require('./api/queries/github-login');
 const googleRoute = require('./api/queries/google-login');
+const facebookRoute = require('./api/queries/facebook-login');
 
 const app = express();
 const port = 5000;
@@ -25,8 +26,12 @@ app.get('/github-oauth-callback', githubRoute.githubLoginCallback);
 
 // Google
 app.get('/login/google', googleRoute.googleLogin);
-app.get('/oauth2callback', googleRoute.googleLoginCallback);
+app.get('/google-oauth-callback', googleRoute.googleLoginCallback);
 
+// Facebook
+app.get('/login/facebook', facebookRoute.facebookLogin);
+app.get('/facebook-oauth-callback', facebookRoute.facebookLoginCallback);
+app.get('/me', facebookRoute.getFacebookUser);
 
 app.listen(port);
 console.log(`Listening on port: ${port}`);
