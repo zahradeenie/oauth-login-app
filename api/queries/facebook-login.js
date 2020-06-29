@@ -23,23 +23,22 @@ const facebookLogin = (req, res) => {
 const facebookLoginCallback = async (req, res) => {
   const authCode = req.query.code;
   try {
-    const accessTokenUrl = `https://graph.facebook.com/v6.0/oauth/access_token?client_id=${appId}&client_secret=${appSecret}&redirect_uri=${redirectURI}&code=${authCode}`;
-
-    const accessToken = await axios.get(accessTokenUrl).then(res => res.data['access_token']);
+    const accessToken = await route.getAccessToken({ authCode, appId, appSecret, redirectURI });
     console.log('Access token is', accessToken);
 
-    const user = await axios.get(`https://graph.facebook.com/v6.0/me?access_token=${accessToken}`);
+    const user = await route.fetchUser(accessToken);
+    console.log(user)
     // const userExists = userController.getOneUser(user)
-    console.log(user);
-
-    // if (user) {
+    
+    // if (!userExists) {
     //   await userController.createUser(user);
+    //   res.status(200).send({ msg: 'New user created' });
     // }
 
     res.send(JSON.stringify(user.data));
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ message: err.response.data || err.message });
+    return res.status(500).json({ message: err.message });
   }
 }
 
