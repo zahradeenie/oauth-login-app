@@ -1,14 +1,28 @@
 <template>
-  <div class="container"></div>
+  <div class="container">
+    <button @click="githubSignIn()">sign in</button>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "App",
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    async githubSignIn() {
+      try {
+        const response = await axios("/login/github");
+        // const res = response.json();
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 
